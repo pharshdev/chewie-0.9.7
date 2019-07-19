@@ -291,7 +291,7 @@ class _MaterialControlsState extends State<MaterialControls> {
               ),
               child: Icon(
                 Icons.closed_caption,
-                color: chewieController.showSubtitle ? Colors.blue : Colors.white,
+                color: chewieController.showSubtitle ? Colors.blue : Colors.black,
               ),
             ),
           ),
