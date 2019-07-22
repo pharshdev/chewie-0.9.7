@@ -43,16 +43,16 @@ class _MaterialControlsState extends State<MaterialControls> {
     if (_latestValue.hasError) {
       return chewieController.errorBuilder != null
           ? chewieController.errorBuilder(
-        context,
-        chewieController.videoPlayerController.value.errorDescription,
-      )
+              context,
+              chewieController.videoPlayerController.value.errorDescription,
+            )
           : Center(
-        child: Icon(
-          Icons.error,
-          color: Colors.white,
-          size: 42,
-        ),
-      );
+              child: Icon(
+                Icons.error,
+                color: Colors.white,
+                size: 42,
+              ),
+            );
     }
 
     return GestureDetector(
@@ -62,33 +62,35 @@ class _MaterialControlsState extends State<MaterialControls> {
         child: Column(
           children: <Widget>[
             _latestValue != null &&
-                !_latestValue.isPlaying &&
-                _latestValue.duration == null ||
-                _latestValue.isBuffering
+                        !_latestValue.isPlaying &&
+                        _latestValue.duration == null ||
+                    _latestValue.isBuffering
                 ? const Expanded(
-              child: const Center(
-                child: const CircularProgressIndicator(),
-              ),
-            ) : _buildHitArea(),
-
+                    child: const Center(
+                      child: const CircularProgressIndicator(),
+                    ),
+                  )
+                : _buildHitArea(),
             Stack(
               alignment: AlignmentDirectional.bottomCenter,
               children: <Widget>[
-                chewieController.showSubtitle && this.subtitle != "" ? Container(
-                      padding: EdgeInsets.only(bottom: 2.0, left: 2.0, right: 2.0),
-                      margin: EdgeInsets.only(bottom: 12.0),
-                      color: Colors.black.withOpacity(0.7),
-                      child: Text(
-                        this.subtitle,
-                        style: TextStyle(
+                chewieController.showSubtitle && this.subtitle != ""
+                    ? Container(
+                        padding:
+                            EdgeInsets.only(bottom: 2.0, left: 2.0, right: 2.0),
+                        margin: EdgeInsets.only(bottom: 12.0),
+                        color: Colors.black.withOpacity(0.7),
+                        child: Text(
+                          this.subtitle,
+                          style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      )) : Container(),
-
+                          ),
+                          textAlign: TextAlign.center,
+                        ))
+                    : Container(),
                 _buildBottomBar(context),
-             ],
+              ],
             )
           ],
         ),
@@ -124,8 +126,8 @@ class _MaterialControlsState extends State<MaterialControls> {
   }
 
   AnimatedOpacity _buildBottomBar(
-      BuildContext context,
-      ) {
+    BuildContext context,
+  ) {
     final iconColor = Theme.of(context).textTheme.button.color;
 
     return AnimatedOpacity(
@@ -144,7 +146,9 @@ class _MaterialControlsState extends State<MaterialControls> {
             chewieController.allowMuting
                 ? _buildMuteButton(controller)
                 : Container(),
-            if (controller.subtitleSource != null || controller.value.subtitleList.length >0 )_buildCCButton(chewieController),
+            if (controller.subtitleSource != null ||
+                controller.value.subtitleList.length > 0)
+              _buildCCButton(chewieController),
             chewieController.allowFullScreen
                 ? _buildExpandButton()
                 : Container(),
@@ -181,47 +185,67 @@ class _MaterialControlsState extends State<MaterialControls> {
 
   Expanded _buildHitArea() {
     return Expanded(
-      child: GestureDetector(
-        onTap: _latestValue != null && _latestValue.isPlaying
-            ? _cancelAndRestartTimer
-            : () {
-          _playPause();
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: GestureDetector(
+                onDoubleTap: () async => chewieController.seekTo(
+                    await chewieController.videoPlayerController.position -
+                        Duration(seconds: 10))),
+          ),
+          Expanded(
+            child: GestureDetector(
+              onTap: _latestValue != null && _latestValue.isPlaying
+                  ? _cancelAndRestartTimer
+                  : () {
+                      _playPause();
 
-          setState(() {
-            _hideStuff = true;
-          });
-        },
-        child: Container(
-          color: Colors.transparent,
-          child: Center(
-            child: AnimatedOpacity(
-              opacity:
-              _latestValue != null && !_latestValue.isPlaying && !_dragging
-                  ? 1.0
-                  : 0.0,
-              duration: Duration(milliseconds: 300),
-              child: GestureDetector(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).dialogBackgroundColor,
-                    borderRadius: BorderRadius.circular(48.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Icon(Icons.play_arrow, size: 32.0),
+                      setState(() {
+                        _hideStuff = true;
+                      });
+                    },
+              child: Container(
+                color: Colors.transparent,
+                child: Center(
+                  child: AnimatedOpacity(
+                    opacity: _latestValue != null &&
+                            !_latestValue.isPlaying &&
+                            !_dragging
+                        ? 1.0
+                        : 0.0,
+                    duration: Duration(milliseconds: 300),
+                    child: GestureDetector(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).dialogBackgroundColor,
+                          borderRadius: BorderRadius.circular(48.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Icon(Icons.play_arrow, size: 32.0),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
+          Expanded(
+            child: GestureDetector(
+                onDoubleTap: () async => chewieController.seekTo(
+                    await chewieController.videoPlayerController.position +
+                        Duration(seconds: 10))),
+          ),
+        ],
       ),
     );
   }
 
   GestureDetector _buildMuteButton(
-      VideoPlayerController controller,
-      ) {
+    VideoPlayerController controller,
+  ) {
     return GestureDetector(
       onTap: () {
         _cancelAndRestartTimer();
@@ -256,25 +280,22 @@ class _MaterialControlsState extends State<MaterialControls> {
   }
 
   GestureDetector _buildCCButton(
-      ChewieController chewieController,
-      ) {
+    ChewieController chewieController,
+  ) {
     return GestureDetector(
       onTap: () {
         _cancelAndRestartTimer();
         chewieController.showSubtitle = !chewieController.showSubtitle;
-        if (!controller.value.subtitleList.isEmpty && chewieController.showSubtitle == true) {
+        if (!controller.value.subtitleList.isEmpty &&
+            chewieController.showSubtitle == true) {
           if (controller.value.subtitleList.length == 1) {
-            controller.setSubtitles(
-                controller.value.subtitleList[0].trackIndex,
-                controller.value.subtitleList[0].groupIndex
-            );
-          }
-          else {
-          Navigator.of(context)
-              .push(new MaterialPageRoute(
-            builder: (BuildContext context) => SubtitlePicker(controller),
-            fullscreenDialog: true,
-          ));
+            controller.setSubtitles(controller.value.subtitleList[0].trackIndex,
+                controller.value.subtitleList[0].groupIndex);
+          } else {
+            Navigator.of(context).push(new MaterialPageRoute(
+              builder: (BuildContext context) => SubtitlePicker(controller),
+              fullscreenDialog: true,
+            ));
           }
         }
       },
@@ -291,7 +312,8 @@ class _MaterialControlsState extends State<MaterialControls> {
               ),
               child: Icon(
                 Icons.closed_caption,
-                color: chewieController.showSubtitle ? Colors.blue : Colors.black,
+                color:
+                    chewieController.showSubtitle ? Colors.blue : Colors.black,
               ),
             ),
           ),
@@ -443,18 +465,15 @@ class _MaterialControlsState extends State<MaterialControls> {
 }
 
 class SubtitlePicker extends StatefulWidget {
-
   final VideoPlayerController controller;
 
   SubtitlePicker(this.controller);
 
   @override
   _SubtitlePickerState createState() => _SubtitlePickerState();
-
 }
 
 class _SubtitlePickerState extends State<SubtitlePicker> {
-
   VideoPlayerController controller;
   List<Subtitle> subtitleList;
 
@@ -464,17 +483,15 @@ class _SubtitlePickerState extends State<SubtitlePicker> {
     subtitleList = widget.controller.value.subtitleList;
   }
 
-
-
   Widget _buildListViewItem(BuildContext context, int index) {
     Subtitle subtitle = subtitleList[index];
     return ListTile(
       title: Text(subtitle.label),
       onTap: () {
-        if (subtitle.groupIndex != null && subtitle.trackIndex != null){
+        if (subtitle.groupIndex != null && subtitle.trackIndex != null) {
           controller.setSubtitles(subtitle.trackIndex, subtitle.groupIndex);
         }
-          Navigator.of(context).pop();
+        Navigator.of(context).pop();
       },
     );
   }
