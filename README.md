@@ -1,7 +1,7 @@
-# chewie with CC button for toggling and/or selecting subtitles. Chewie MaterialControls display subtitles from controller.
+# Customised chewie with CC button for toggling and/or selecting subtitles. Chewie MaterialControls display subtitles from controller.
 
-Works with https://github.com/snaeji/video_player-0.10.1-3
-Note! The video player is set to work with VTT from url and subtitles from HLS streams.
+Works with https://github.com/pharshdev/video_player-0.10.1-3
+Note! The video player is set to work with SRT from url and subtitles from HLS streams.
 
 The video player for Flutter with a heart of gold. 
 
