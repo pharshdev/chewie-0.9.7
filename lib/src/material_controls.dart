@@ -79,7 +79,7 @@ class _MaterialControlsState extends State<MaterialControls> {
                         padding:
                             EdgeInsets.only(bottom: 2.0, left: 2.0, right: 2.0),
                         margin: EdgeInsets.only(bottom: 12.0),
-                        color: Colors.black.withOpacity(0.7),
+                        color: Colors.transparent,
                         child: Text(
                           this.subtitle,
                           style: TextStyle(
