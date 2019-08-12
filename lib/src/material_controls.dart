@@ -71,27 +71,22 @@ class _MaterialControlsState extends State<MaterialControls> {
                     ),
                   )
                 : _buildHitArea(),
-            Stack(
-              alignment: AlignmentDirectional.bottomCenter,
-              children: <Widget>[
-                chewieController.showSubtitle && this.subtitle != ""
-                    ? Container(
-                        padding:
-                            EdgeInsets.only(bottom: 2.0, left: 2.0, right: 2.0),
-                        margin: EdgeInsets.only(bottom: 12.0),
-                        color: Colors.transparent,
-                        child: Text(
-                          this.subtitle,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
-                          textAlign: TextAlign.center,
-                        ))
-                    : Container(),
-                _buildBottomBar(context),
-              ],
-            )
+            chewieController.showSubtitle && this.subtitle != ""
+                ? Container(
+                    padding:
+                        EdgeInsets.only(bottom: 2.0, left: 2.0, right: 2.0),
+                    margin: EdgeInsets.only(bottom: 12.0),
+                    color: Colors.transparent,
+                    child: Text(
+                      this.subtitle,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ))
+                : Container(),
+            Visibility(visible: _hideStuff, child: _buildBottomBar(context)),
           ],
         ),
       ),
