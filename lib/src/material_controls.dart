@@ -86,7 +86,7 @@ class _MaterialControlsState extends State<MaterialControls> {
                       textAlign: TextAlign.center,
                     ))
                 : Container(),
-            Visibility(visible: _hideStuff, child: _buildBottomBar(context)),
+            _hideStuff ? Container() : _buildBottomBar(context),
           ],
         ),
       ),
