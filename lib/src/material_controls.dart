@@ -130,12 +130,13 @@ class _MaterialControlsState extends State<MaterialControls> {
       duration: Duration(milliseconds: 300),
       child: Container(
         height: barHeight,
-        color: Theme.of(context).dialogBackgroundColor,
         child: Row(
           children: <Widget>[
             _buildPlayPause(controller),
             chewieController.isLive
-                ? Expanded(child: const Text('LIVE'))
+                ? Expanded(
+                    child: const Text('LIVE',
+                        style: TextStyle(color: Colors.white)))
                 : _buildPosition(iconColor),
             chewieController.isLive ? const SizedBox() : _buildProgressBar(),
             chewieController.allowMuting
@@ -171,6 +172,7 @@ class _MaterialControlsState extends State<MaterialControls> {
               chewieController.isFullScreen
                   ? Icons.fullscreen_exit
                   : Icons.fullscreen,
+              color: Colors.white,
             ),
           ),
         ),
@@ -213,7 +215,6 @@ class _MaterialControlsState extends State<MaterialControls> {
                     child: GestureDetector(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).dialogBackgroundColor,
                           borderRadius: BorderRadius.circular(48.0),
                         ),
                         child: Padding(
@@ -263,10 +264,10 @@ class _MaterialControlsState extends State<MaterialControls> {
                 right: 8.0,
               ),
               child: Icon(
-                (_latestValue != null && _latestValue.volume > 0)
-                    ? Icons.volume_up
-                    : Icons.volume_off,
-              ),
+                  (_latestValue != null && _latestValue.volume > 0)
+                      ? Icons.volume_up
+                      : Icons.volume_off,
+                  color: Colors.white),
             ),
           ),
         ),
@@ -308,7 +309,7 @@ class _MaterialControlsState extends State<MaterialControls> {
               child: Icon(
                 Icons.closed_caption,
                 color:
-                    chewieController.showSubtitle ? Colors.blue : Colors.black,
+                    chewieController.showSubtitle ? Colors.blue : Colors.white,
               ),
             ),
           ),
@@ -330,6 +331,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         ),
         child: Icon(
           controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          color: Colors.white,
         ),
       ),
     );
