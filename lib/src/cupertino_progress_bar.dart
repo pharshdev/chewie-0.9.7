@@ -63,7 +63,7 @@ class _VideoProgressBarState extends State<CupertinoVideoProgressBar> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          color: Colors.transparent,
+          color: Colors.white,
           child: CustomPaint(
             painter: _ProgressBarPainter(
               controller.value,

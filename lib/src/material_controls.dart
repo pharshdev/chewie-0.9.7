@@ -219,7 +219,8 @@ class _MaterialControlsState extends State<MaterialControls> {
                         ),
                         child: Padding(
                           padding: EdgeInsets.all(12.0),
-                          child: Icon(Icons.play_arrow, size: 32.0),
+                          child: Icon(Icons.play_arrow,
+                              size: 32.0, color: Colors.white),
                         ),
                       ),
                     ),
@@ -349,9 +350,7 @@ class _MaterialControlsState extends State<MaterialControls> {
       padding: EdgeInsets.only(right: 24.0),
       child: Text(
         '${formatDuration(position)} / ${formatDuration(duration)}',
-        style: TextStyle(
-          fontSize: 14.0,
-        ),
+        style: TextStyle(fontSize: 14.0, color: Colors.white),
       ),
     );
   }
