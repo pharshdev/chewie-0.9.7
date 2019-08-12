@@ -193,44 +193,6 @@ class _MaterialControlsState extends State<MaterialControls> {
           ),
           Expanded(
             child: GestureDetector(
-              onTap: _latestValue != null && _latestValue.isPlaying
-                  ? _cancelAndRestartTimer
-                  : () {
-                      _playPause();
-
-                      setState(() {
-                        _hideStuff = true;
-                      });
-                    },
-              child: Container(
-                color: Colors.transparent,
-                child: Center(
-                  child: AnimatedOpacity(
-                    opacity: _latestValue != null &&
-                            !_latestValue.isPlaying &&
-                            !_dragging
-                        ? 1.0
-                        : 0.0,
-                    duration: Duration(milliseconds: 300),
-                    child: GestureDetector(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(48.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(12.0),
-                          child: Icon(Icons.play_arrow,
-                              size: 32.0, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
                 onDoubleTap: () async => chewieController.seekTo(
                     await chewieController.videoPlayerController.position +
                         Duration(seconds: 10))),
