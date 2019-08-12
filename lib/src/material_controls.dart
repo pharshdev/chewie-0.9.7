@@ -453,7 +453,7 @@ class _MaterialControlsState extends State<MaterialControls> {
               playedColor: Theme.of(context).accentColor,
               handleColor: Theme.of(context).accentColor,
               bufferedColor: Colors.grey,
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
             ),
       ),
     ));
