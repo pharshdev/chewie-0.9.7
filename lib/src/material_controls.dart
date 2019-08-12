@@ -431,33 +431,33 @@ class _MaterialControlsState extends State<MaterialControls> {
 
   Widget _buildProgressBar() {
     return Expanded(
-      child: Padding(
-        padding: EdgeInsets.only(right: 20.0),
-        child: MaterialVideoProgressBar(
-          controller,
-          onDragStart: () {
-            setState(() {
-              _dragging = true;
-            });
+        child: Padding(
+      padding: EdgeInsets.only(right: 20.0),
+      child: MaterialVideoProgressBar(
+        controller,
+        onDragStart: () {
+          setState(() {
+            _dragging = true;
+          });
 
-            _hideTimer?.cancel();
-          },
-          onDragEnd: () {
-            setState(() {
-              _dragging = false;
-            });
+          _hideTimer?.cancel();
+        },
+        onDragEnd: () {
+          setState(() {
+            _dragging = false;
+          });
 
-            _startHideTimer();
-          },
-          colors: chewieController.materialProgressColors ??
-              ChewieProgressColors(
-                  playedColor: Theme.of(context).accentColor,
-                  handleColor: Theme.of(context).accentColor,
-                  bufferedColor: Theme.of(context).backgroundColor,
-                  backgroundColor: Theme.of(context).disabledColor),
-        ),
+          _startHideTimer();
+        },
+        colors: chewieController.materialProgressColors ??
+            ChewieProgressColors(
+              playedColor: Theme.of(context).accentColor,
+              handleColor: Theme.of(context).accentColor,
+              bufferedColor: Colors.grey,
+              backgroundColor: Colors.transparent,
+            ),
       ),
-    );
+    ));
   }
 }
 
