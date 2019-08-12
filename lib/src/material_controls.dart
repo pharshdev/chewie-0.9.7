@@ -61,6 +61,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         absorbing: _hideStuff,
         child: Column(
           mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             _latestValue != null &&
                         !_latestValue.isPlaying &&
