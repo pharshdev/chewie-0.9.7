@@ -178,7 +178,7 @@ class _ProgressBarPainter extends CustomPainter {
           center: Offset(playedPart, baseOffset + barHeight / 2),
           radius: handleHeight));
 
-    canvas.drawShadow(shadowPath, Colors.black, 0.2, false);
+    canvas.drawShadow(shadowPath, Colors.white, 0.2, false);
     canvas.drawCircle(
       Offset(playedPart, baseOffset + barHeight / 2),
       handleHeight,
