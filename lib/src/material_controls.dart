@@ -60,6 +60,7 @@ class _MaterialControlsState extends State<MaterialControls> {
       child: AbsorbPointer(
         absorbing: _hideStuff,
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             _latestValue != null &&
                         !_latestValue.isPlaying &&
