@@ -129,6 +129,7 @@ class _MaterialControlsState extends State<MaterialControls> {
       opacity: _hideStuff ? 0.0 : 1.0,
       duration: Duration(milliseconds: 300),
       child: Container(
+        color: Colors.black.withOpacity(0.5),
         height: barHeight,
         child: Row(
           children: <Widget>[
